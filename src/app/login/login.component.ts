@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
     // );
 
     if (userEmail === 'admin@bioxcel.com' && userPwd === 'admin@123') {
+      this.setSession({ email: "admin@bioxcel.com", member_id: 1, firstname: 'admin' });
       this._router.navigate(['/dashboard'], { relativeTo: this._activatedRoute });
     } else {
       this.errorMessage = "Invalid User name or password";
