@@ -31,29 +31,29 @@ export class LoginComponent implements OnInit {
     let userPwd = myForm.value.pass;
     this.userCredentials = { email: userEmail, password: userPwd };
 
-    this.usersService.doLogin(this.userCredentials).subscribe( //3 Login
-      data => {
-        this.result = data;
-        console.log("result: ", this.result);
+    // this.usersService.doLogin(this.userCredentials).subscribe( //3 Login
+    //   data => {
+    //     this.result = data;
+    //     console.log("result: ", this.result);
 
-        if (this.result.search[0] == undefined) {
-          this.error = "true";
-          this.loading = false;
-          this.errorMessage = "Invalid User name or password";
-        } else {
-          if (this.result.search[0].status == 'Active') {
-            this.setSession(this.result.search[0]);
-            this._router.navigate(['/dashboard'], { relativeTo: this._activatedRoute });
-          }
-        }
-      }
-    );
+    //     if (this.result.search[0] == undefined) {
+    //       this.error = "true";
+    //       this.loading = false;
+    //       this.errorMessage = "Invalid User name or password";
+    //     } else {
+    //       if (this.result.search[0].status == 'Active') {
+    //         this.setSession(this.result.search[0]);
+    //         this._router.navigate(['/dashboard'], { relativeTo: this._activatedRoute });
+    //       }
+    //     }
+    //   }
+    // );
 
-    // if (userEmail === 'admin@bioxcel.com' && userPwd === 'admin@123') {
-    //   this._router.navigate(['/dashboard'], { relativeTo: this._activatedRoute });
-    // } else {
-    //   this.formSubmitErr = "Invalid User name or password";
-    // }
+    if (userEmail === 'admin@bioxcel.com' && userPwd === 'admin@123') {
+      this._router.navigate(['/dashboard'], { relativeTo: this._activatedRoute });
+    } else {
+      this.errorMessage = "Invalid User name or password";
+    }
 
   }
 
