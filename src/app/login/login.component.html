@@ -1,12 +1,12 @@
 <div class="login-wrapper">
     <div class="login-panel">
-        <div class="login-box">
+        <div class="login-box"> 
 
           <div class="alert alert-danger" *ngIf="errorMessage"><span class='p-3'>{{errorMessage}}</span></div>
           
           <div class="loading-custom" *ngIf="loading">&nbsp;Loading...</div>
           <form method="post" #myForm="ngForm">
-                <h2>Login</h2>
+                <h2>Login Page</h2>
                   <div class="mb-3">
                     <!--<label for="email" class="form-label">Email</label>-->
                     <input ngModel [ngClass]="{
