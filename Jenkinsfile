@@ -8,7 +8,7 @@ pipeline {
             checkout scm
         } 
         stage('Install dependencies') {
-            nodejs('nodejs') {
+            steps {
                 sh 'npm install'
                 echo "Modules installed"
             }
