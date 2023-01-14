@@ -14,7 +14,8 @@ node(){
         nodejs('nodejs') {
             sh 'npm run build'
             echo "Build completed"
-        }        
+        }
+        
     }
 
     stage('Package Build') {
@@ -41,5 +42,3 @@ node('awsnode') {
     sh "yes | sudo cp -R bundle.tar.gz /var/www/html && cd /var/www/html && sudo tar -xvf bundle.tar.gz"
     echo 'Copy completed'
 }
-
-
