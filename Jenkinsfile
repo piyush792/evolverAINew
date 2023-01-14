@@ -7,12 +7,7 @@ pipeline {
         stage('Cloning Git') {
             checkout scm
         } 
-        stage('Install dependencies') {
-            steps {
-                sh 'npm install'
-                echo "Modules installed"
-            }
-        }
+        
     }
 }
 
