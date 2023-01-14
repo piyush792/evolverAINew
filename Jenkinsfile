@@ -32,7 +32,7 @@ node(){
     }
 }
 
-node('awsnode') {
+node('angular-v1') {
     echo 'Unstash'
     unstash 'buildArtifacts'
     echo 'Artifacts copied'
@@ -41,3 +41,5 @@ node('awsnode') {
     sh "yes | sudo cp -R bundle.tar.gz /var/www/html && cd /var/www/html && sudo tar -xvf bundle.tar.gz"
     echo 'Copy completed'
 }
+
+
