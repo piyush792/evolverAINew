@@ -34,7 +34,7 @@ node(){
     }
 }
 
-node('awsnode') {
+node('angular-v1') {
     echo 'Unstash'
     unstash 'buildArtifacts'
     echo 'Artifacts copied'
