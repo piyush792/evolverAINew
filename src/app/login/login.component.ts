@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
         } else {
           if (this.result.search[0].status == 'Active') {
             this.setSession(this.result.search[0]);
-            this._router.navigate(['/dashboard'], { relativeTo: this._activatedRoute });
+            this._router.navigate(['/module_selection'], { relativeTo: this._activatedRoute });
           }
         }
       }
@@ -59,7 +60,11 @@ export class LoginComponent implements OnInit {
   }
 
   private setSession(authResult) {
+    const expiresAt = moment().add(authResult.expiresAt, authResult.expireTimeUnit);
     sessionStorage.setItem('currentUser', JSON.stringify({ user_name: authResult.firstname, user_id: authResult.member_id, user_email: authResult.email }));
+    localStorage.setItem('id_token', authResult.idToken);
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+
   }
 
 }

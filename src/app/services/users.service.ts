@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import * as moment from "moment";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,6 +26,28 @@ export class UsersService {
 
   getCurrentUser(): string {
     return sessionStorage.getItem('currentUser');
+  }
+
+  isLoggednIn() {
+    //return JSON.parse(this.getCurrentUser()) !== null;
+    // return moment().isBefore(this.getExpiration());
+    return true;
+  }
+
+  isLoggedOut() {
+    return !this.isLoggednIn();
+  }
+
+  logout() {
+    sessionStorage.removeItem('currentUser');
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
+  }
+
+  getExpiration() {
+    const expiration = localStorage.getItem("expires_at");
+    const expiresAt = JSON.parse(expiration);
+    return moment(expiresAt);
   }
 
 }
