@@ -32,36 +32,36 @@ export class LoginComponent implements OnInit {
     let userPwd = myForm.value.pass;
     this.userCredentials = { email: userEmail, password: userPwd };
 
-    // this.usersService.doLogin(this.userCredentials).subscribe( //3 Login
-    //   data => {
-    //     this.result = data;
-    //     console.log("result: ", this.result);
+    this.usersService.doLogin(this.userCredentials).subscribe( //3 Login
+      data => {
+        this.result = data;
+        console.log("result: ", this.result);
 
-    //     if (this.result.search[0] == undefined) {
-    //       this.error = "true";
-    //       this.loading = false;
-    //       this.errorMessage = "Invalid User name or password";
-    //     } else {
-    //       if (this.result.search[0].status == 'Active') {
-    //         this.setSession(this.result.search[0]);
-    //         this._router.navigate(['/module_selection'], { relativeTo: this._activatedRoute });
-    //       }
-    //     }
-    //   }
-    // );
+        if (this.result.search[0] == undefined) {
+          this.error = "true";
+          this.loading = false;
+          this.errorMessage = "Invalid User name or password";
+        } else {
+          if (this.result.search[0].deleted == '1') {
+            this.setSession(this.result.search[0]);
+            this._router.navigate(['/module_selection'], { relativeTo: this._activatedRoute });
+          }
+        }
+      }
+    );
 
-    if (userEmail === 'admin@bioxcel.com' && userPwd === 'admin@123') {
-      this.setSession({ email: "admin@bioxcel.com", member_id: 1, firstname: 'admin' });
-      this._router.navigate(['/module_selection'], { relativeTo: this._activatedRoute });
-    } else {
-      this.errorMessage = "Invalid User name or password";
-    }
+//     if (userEmail === 'admin@bioxcel.com' && userPwd === 'admin@123') {
+//       this.setSession({ email: "admin@bioxcel.com", member_id: 1, firstname: 'admin' });
+//       this._router.navigate(['/module_selection'], { relativeTo: this._activatedRoute });
+//     } else {
+//       this.errorMessage = "Invalid User name or password";
+//     }
 
   }
 
   private setSession(authResult) {
     const expiresAt = moment().add(authResult.expiresAt, authResult.expireTimeUnit);
-    sessionStorage.setItem('currentUser', JSON.stringify({ user_name: authResult.firstname, user_id: authResult.member_id, user_email: authResult.email }));
+    sessionStorage.setItem('currentUser', JSON.stringify({ user_name: authResult.firstname, user_id: authResult.member_id, email: authResult.email }));
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
 
